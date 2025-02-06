@@ -45,5 +45,19 @@ pipeline {
 
         }
 
+        stage('Push Docker Image'){
+                    steps {
+                            echo 'Pushing the Docker Image'
+                            withCredentials([string(credentialsId: 'dockerhub_pdw', variable: 'dockerhub_password')]) {
+                                sh 'docker login -u ram1uj -p ${dockerhub_password}'
+                                sh 'docker push ram1uj/wmart-todo-app'
+                            }
+                          }
+
+                }
+
+
     }
 }
+
+
